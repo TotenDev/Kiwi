@@ -8,27 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "QueueManager.h"
+#import "MessageCenter.h"
 int main(int argc, const char * argv[]) {
-	NSAutoreleasePool * pool2 = [[NSAutoreleasePool alloc] init];
-	RemoteProcedure *procedure = [RemoteProcedure newProcedureWithPath:@"/Users/gwdp/Desktop/teste.php" andParams:nil];
-	[pool2 drain];
-	int u = 0;
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];			[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"2"];			[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"2"];			[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"2"];			[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"2"];			[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"12"];			[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];			[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
-	[[QueueManager sharedQueueManager] addIntoQueueWithRemoteProcedure:procedure callBack:nil queueIdentifier:@"1"];
+	MessageCenter *center = [[MessageCenter alloc] init];
+	[center runLoop];
+	[center release];
 	[pool drain];
-	while (YES) {
-		
-	}
     return 0;
 }
 

@@ -12,6 +12,7 @@
 		4F807DFE1596EA0B00905FC0 /* queue.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F807DFD1596EA0B00905FC0 /* queue.1 */; };
 		4F807E0E1596ED1000905FC0 /* RemoteProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F807E0D1596ED1000905FC0 /* RemoteProcedure.m */; };
 		4F807E161597F01100905FC0 /* QueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F807E151597F01100905FC0 /* QueueManager.m */; };
+		4F807E191598345800905FC0 /* MessageCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F807E181598345800905FC0 /* MessageCenter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +39,8 @@
 		4F807E121596EE6F00905FC0 /* TDLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDLog.h; sourceTree = "<group>"; };
 		4F807E141597F01100905FC0 /* QueueManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueueManager.h; sourceTree = "<group>"; };
 		4F807E151597F01100905FC0 /* QueueManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueueManager.m; sourceTree = "<group>"; };
+		4F807E171598345800905FC0 /* MessageCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCenter.h; sourceTree = "<group>"; };
+		4F807E181598345800905FC0 /* MessageCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCenter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 			children = (
 				4F807E0C1596ED1000905FC0 /* RemoteProcedure.h */,
 				4F807E0D1596ED1000905FC0 /* RemoteProcedure.m */,
+				4F807E171598345800905FC0 /* MessageCenter.h */,
+				4F807E181598345800905FC0 /* MessageCenter.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -169,6 +174,7 @@
 				4F807DFA1596EA0B00905FC0 /* main.m in Sources */,
 				4F807E0E1596ED1000905FC0 /* RemoteProcedure.m in Sources */,
 				4F807E161597F01100905FC0 /* QueueManager.m in Sources */,
+				4F807E191598345800905FC0 /* MessageCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -60,7 +60,7 @@ static QueueManager *_sharedQueueManager = nil ;
 	else { 
 		TDLog(kLogLevelQueue,nil,@"Creating queue with id:%@ and detaching new thread for it",queueID);
 		//init queue
-		queue = [[NSMutableArray alloc] init];
+		queue = [[[NSMutableArray alloc] init] autorelease];
 		//add into queue manager
 		[_queues setObject:queue forKey:queueID];
 		//run procedure thread
@@ -82,7 +82,6 @@ static QueueManager *_sharedQueueManager = nil ;
 		}
 		//Check if stills need to be on queue manager
 		if ([queue count] == 0) { 
-			[queue release];
 			[_queues removeObjectForKey:queueID]; 
 			TDLog(kLogLevelQueue,nil,@"queue with id:%@ does not have procedures on queue, removing thread of it.",queueID);
 		}
@@ -114,17 +113,20 @@ static QueueManager *_sharedQueueManager = nil ;
 		NSAutoreleasePool *pool2 = [[NSAutoreleasePool alloc] init];
 		NSDictionary *jobDict = [self procedureOfQueueID:queueID];
 		if (jobDict) {
-			TDLog(kLogLevelQueue,nil,@"will run procedure:%@ in thread of queue with id:",jobDict,queueID);
+			TDLog(kLogLevelQueue,nil,@"will run procedure:%@ in thread of queue with id%@:",jobDict,queueID);
 			RemoteProcedure *procedure = [jobDict objectForKey:@"procedure"];
 			NSString *response ;
 			id targetCallback = [jobDict objectForKey:@"callback"];
 			//Execute procedure
-			[procedure executeWithResponse:&response];
-			//Check if need callback
-			if (targetCallback && [targetCallback respondsToSelector:@selector(response:)]) {
-				[targetCallback performSelectorOnMainThread:@selector(response:) withObject:response waitUntilDone:YES];
+			@try { 
+				[procedure executeWithResponse:&response]; 
+				//Check if need callback
+				if (targetCallback && [targetCallback respondsToSelector:@selector(response:)]) {
+					[targetCallback performSelectorOnMainThread:@selector(response:) withObject:response waitUntilDone:YES];
+				}
+				[response release];
 			}
-			[response release];
+			@catch (NSException *exception) { TDLog(kLogLevelQueue,nil,@"procedure:%@ in thread of queue with id:%@ exit with exception:%@\nSkiping to next procedure.",jobDict,queueID,exception); }
 			//remove procedure of this queue
 			jobDict = nil;
 			[self removeProcedureWithQueueID:queueID];

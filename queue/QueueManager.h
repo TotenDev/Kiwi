@@ -13,7 +13,7 @@
 	NSMutableDictionary *_queues ;
 	NSRecursiveLock *_queueLocker ;
 }
-#pragma mark - Public Methodss
+#pragma mark - Public Methods
 + (QueueManager *)sharedQueueManager ;
 - (void)addIntoQueueWithRemoteProcedure:(RemoteProcedure *)_rp callBack:(id)_targetCallBack queueIdentifier:(NSString *)queueID ;
 

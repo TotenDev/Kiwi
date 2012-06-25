@@ -19,6 +19,7 @@ typedef enum {
 	//Manager
 	kLogLevelQueue				= kLogFuncLog,
 	kLogLevelProcedures			= kLogFuncLog,
+	kLogLevelMessageCenter			= kLogFuncLog,
 	//Error
 	kLogLevelError             = kLogFuncAssert,
 }kLogLevels;
