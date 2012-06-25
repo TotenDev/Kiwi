@@ -16,7 +16,9 @@ D_HEADERS=queue-Prefix.pch TDLog.h
 
 # The following two lines force the standard make to recognize the 
 # Objective-C .m suffix.
-
+.SUFFIXES: .o .m
+.m.o:
+$(CC) -c $(CFLAGS) $< 
 
 # Explicit rules
 hist: $(OBJ)
