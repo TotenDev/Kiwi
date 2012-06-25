@@ -8,16 +8,16 @@
 # Macro declarations
 
 CC = gcc
-CFLAGS = `gnustep-config --objc-flags` -g -std=c99
+CFLAGS = `gnustep-config --objc-flags` -Wno-unknown-pragmas -g -std=c99
 LIBS = -L/usr/GNUstep/System/Library/Libraries/ -lgnustep-base -lobjc
 SRC= RemoteProcedure.m QueueManager.m MessageCenter.m main.m
 
 # Explicit rules
 hist: $(OBJ)
-	$(CC) $(CFLAGS) -o TQueue $(SRC) $(LIBS)
+	$(CC) $(CFLAGS) -o kiwi $(SRC) $(LIBS)
 
+# Clean
+	@echo -n "Cleaning... "
+	@rm -rf *.d *.o
+	@echo "[done]"
 
-#clean
-	echo Cleaning
-	rm -rf *.d *.o 
-	
