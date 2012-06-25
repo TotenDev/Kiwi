@@ -1,7 +1,7 @@
 #
 # Make File for GCC with GNUStep and Obj-c
 # 
-# Should Use: gcc `gnustep-config --objc-flags` -L/usr/GNUstep/System/Library/Libraries/ -lgnustep-base teste.m -o teste
+# Should Use: gcc `gnustep-config --objc-flags` -Wall -L/usr/GNUstep/System/Library/Libraries/ -lgnustep-base teste.m -o teste
 # Compiler: GCC
 # Linker: GNUStep Obj-c Libraries
 
