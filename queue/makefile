@@ -18,3 +18,6 @@ hist: $(OBJ)
 
 
 #clean
+	echo Cleaning
+	rm -rf *.d *.o 
+	
