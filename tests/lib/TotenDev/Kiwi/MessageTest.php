@@ -7,7 +7,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
 {
     public function testIsCreatingMessage()
     {
-        $queue = new Queue('MyTestQueue');
+        $queue = new Queue('MyTestQueue', 5253);
         $message = new Message;
         $message->setQueue($queue);
         $message->setWorker('/var/www/test.php');

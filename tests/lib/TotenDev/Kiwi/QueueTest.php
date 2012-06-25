@@ -11,10 +11,5 @@ class QueueTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(msg_queue_exists($queue->getKey()));
         $this->assertEquals('MyTestQueue', $queue->getName());
         $this->assertInternalType('resource', $queue->getId());
-
-        $queue = new Queue('MyTestQueue');
-        $this->assertTrue(msg_queue_exists($queue->getKey()));
-        $this->assertEquals('MyTestQueue', $queue->getName());
-        $this->assertInternalType('resource', $queue->getId());
     }
 }

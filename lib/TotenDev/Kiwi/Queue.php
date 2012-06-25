@@ -8,12 +8,8 @@ class Queue
     protected $id;
     protected $name;
 
-    public function __construct($name, $key = null)
+    public function __construct($name, $key)
     {
-        if (!$key) {
-            $key = rand(1, 10000);
-        }
-
         $this->key = $key;
         $this->name = $name;
         $this->id = msg_get_queue($this->key, 0666);
