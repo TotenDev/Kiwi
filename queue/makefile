@@ -14,7 +14,7 @@ SRC= RemoteProcedure.m QueueManager.m MessageCenter.m main.m
 
 # Explicit rules
 hist: $(OBJ)
-	$(CC) $(CFLAGS) -o kiwi $(SRC) $(LIBS)
+	$(CC) $(CFLAGS) -o kiwid $(SRC) $(LIBS)
 
 # Clean
 	@echo -n "Cleaning... "
