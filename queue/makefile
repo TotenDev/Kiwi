@@ -9,7 +9,7 @@
 
 CC = gcc
 CFLAGS = `gnustep-config --objc-flags` -g -std=c99
-LIBS = -L/usr/GNUstep/System/Library/Libraries/ -lgnustep-base
+LIBS = -lobjc -L/usr/GNUstep/System/Library/Libraries/ #-lgnustep-base
 SRC=main.m QueueManager.m RemoteProcedure.m
 OBJ=main.o QueueManager.o RemoteProcedure.o 
 D_HEADERS=queue-Prefix.pch TDLog.h
