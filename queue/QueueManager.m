@@ -106,10 +106,12 @@ static QueueManager *_sharedQueueManager = nil ;
 }
 #pragma mark - Proceduring
 - (void)runProcedureQueueWithID:(NSString *)queueID {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	BOOL hasJob = YES ;
 	TDLog(kLogLevelQueue,nil,@"now running deticated thread for queue with id:%@",queueID);
 	while (hasJob) {
 		//
+		NSAutoreleasePool *pool2 = [[NSAutoreleasePool alloc] init];
 		NSDictionary *jobDict = [self procedureOfQueueID:queueID];
 		if (jobDict) {
 			TDLog(kLogLevelQueue,nil,@"will run procedure:%@ in thread of queue with id:",jobDict,queueID);
@@ -128,7 +130,9 @@ static QueueManager *_sharedQueueManager = nil ;
 			[self removeProcedureWithQueueID:queueID];
 		}
 		else hasJob = NO ;
+		[pool2 drain];
 	}
+	[pool drain];
 }
 
 @end
