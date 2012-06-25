@@ -10,7 +10,7 @@
 CC = gcc
 CFLAGS = `gnustep-config --objc-flags` -g -std=c99
 LIBS = -L/usr/GNUstep/System/Library/Libraries/ -lgnustep-base -lobjc
-SRC=main.m QueueManager.m RemoteProcedure.m
+SRC= RemoteProcedure.m QueueManager.m main.m
 OBJ=main.o QueueManager.o RemoteProcedure.o 
 
 # Explicit rules
