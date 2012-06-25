@@ -22,9 +22,9 @@ hist: $(OBJ)
 main.o: 
 	$(CC) $(CFLAGS) main.m $(LIBS)
 QueueManager.o: 
-	$(CC) $(CFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) QueueManager.m $(LIBS)
 RemoteProcedure.o: 
-	$(CC) $(CFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) RemoteProcedure.m $(LIBS)
 
 
 #clean
