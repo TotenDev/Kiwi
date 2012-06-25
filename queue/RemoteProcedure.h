@@ -16,4 +16,8 @@
 + (RemoteProcedure *)newProcedureWithPath:(NSString *)path andParams:(NSString *)params ;
 - (void)executeWithResponse:(NSString **)response ;
 
+
+#pragma mark - Private
+- (id)initProcedureWithPath:(NSString *)_filePath andParameters:(NSString *)_params ;
+- (NSString *)executionCommand;
 @end

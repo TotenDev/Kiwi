@@ -16,4 +16,11 @@
 #pragma mark - Public Methodss
 + (QueueManager *)sharedQueueManager ;
 - (void)addIntoQueueWithRemoteProcedure:(RemoteProcedure *)_rp callBack:(id)_targetCallBack queueIdentifier:(NSString *)queueID ;
+
+#pragma mark - Queue Manager
+- (void)addAndCreateIfNeeded:(NSDictionary *)queueProcedure queueIdentifier:(NSString *)queueID ;
+- (void)removeProcedureWithQueueID:(NSString *)queueID ;
+- (NSDictionary *)procedureOfQueueID:(NSString *)queueID ;
+#pragma mark - Proceduring
+- (void)runProcedureQueueWithID:(NSString *)queueID ;
 @end

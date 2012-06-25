@@ -8,15 +8,6 @@
 
 #import "QueueManager.h"
 #import "TDLog.h"
-//Private
-@interface QueueManager (/*priv*/)
-#pragma mark - Queue Manager
-- (void)addAndCreateIfNeeded:(NSDictionary *)queueProcedure queueIdentifier:(NSString *)queueID ;
-- (void)removeProcedureWithQueueID:(NSString *)queueID ;
-- (NSDictionary *)procedureOfQueueID:(NSString *)queueID ;
-#pragma mark - Proceduring
-- (void)runProcedureQueueWithID:(NSString *)queueID ;
-@end
 
 
 

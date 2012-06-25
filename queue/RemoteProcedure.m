@@ -8,11 +8,6 @@
 
 #import "RemoteProcedure.h"
 #import "TDLog.h"
-//Private
-@interface RemoteProcedure (/*private*/)
-- (id)initProcedureWithPath:(NSString *)_filePath andParameters:(NSString *)_params ;
-- (NSString *)executionCommand;
-@end
 
 //Main Implementation
 @implementation RemoteProcedure
