@@ -21,7 +21,7 @@ hist: $(OBJ)
 
 # Implicit rules
 main.o: 
-	$(CC) $(CFLAGS) QueueManager.h $(D_HEADERS) $(LIBS)
+	$(CC) $(CFLAGS) main.m QueueManager.h $(D_HEADERS) $(LIBS)
 QueueManager.o: 
 	$(CC) $(CFLAGS) QueueManager.h QueueManager.m RemoteProcedure.h $(D_HEADERS) $(LIBS)
 RemoteProcedure.o: 
