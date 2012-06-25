@@ -17,13 +17,13 @@ D_HEADERS=queue-Prefix.pch TDLog.h
 # The following two lines force the standard make to recognize the 
 # Objective-C .m suffix.
 
+# Explicit rules
+hist: $(OBJ)
+	$(CC) $(CFLAGS) -o main $(OBJ) $(LIBS)
+
 # Implicit rules
 main.o: QueueManager.h $(D_HEADERS)
 QueueManager.o: QueueManager.h QueueManager.m RemoteProcedure.h $(D_HEADERS)
 RemoteProcedure.o: RemoteProcedure.h RemoteProcedure.m $(D_HEADERS)
-
-# Explicit rules
-hist: $(OBJ)
-	$(CC) $(CFLAGS) -o main $(OBJ) $(LIBS)
 
 #clean rm -rf QueueManager.o RemoteProcedure.o main.o
