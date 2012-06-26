@@ -32,6 +32,7 @@
 		//Get execution 
 		NSString *whereExecute = [[NSString stringWithString:[self executionCommand]] retain];
 		NSPipe *procedureOutput = [NSPipe pipe];
+		NSPipe *procedureOutputError = [NSPipe pipe];
 		NSArray *procedureParams = [(params ? [NSArray arrayWithObjects:filePath,params,nil] : [NSArray arrayWithObject:filePath]) retain];
 		TDLog(kLogLevelProcedures,nil,@"Starting Procedure");
 		//Task it
@@ -39,13 +40,20 @@
 		[theTask setLaunchPath:whereExecute];
 		[theTask setArguments:procedureParams];
 		[theTask setStandardOutput:procedureOutput];
+		[theTask setStandardError:procedureOutputError];
 		[theTask launch];
 		[theTask waitUntilExit];
 		//Read pipe
-		NSFileHandle *readHandle = [procedureOutput fileHandleForReading];
-		NSData *readData = [readHandle readDataToEndOfFile];
-		*response = [[NSString alloc] initWithData:readData encoding:NSUTF8StringEncoding];
+		NSFileHandle *readHandleOut = [procedureOutput fileHandleForReading];
+		NSData *readDataOut = [readHandleOut readDataToEndOfFile];
+		*response = [[NSString alloc] initWithData:readDataOut encoding:NSUTF8StringEncoding];
 		TDLog(kLogLevelProcedures,nil,@"Procedure finished with response:%@",*response);
+		//Error Pipe
+		NSFileHandle *readHandleError = [procedureOutput fileHandleForReading];
+		NSData *readDataError = [readHandleError readDataToEndOfFile];
+		NSString *error = [[NSString alloc] initWithData:readDataError encoding:NSUTF8StringEncoding];
+		if (error && readDataError) { TDLog(kLogLevelProcedures,nil,@"Procedure finished with error:%@",error); }
+		[error release];
 		//clean jobs
 		[procedureParams release];
 		[whereExecute release];
