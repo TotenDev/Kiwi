@@ -76,21 +76,37 @@
 		NSMutableArray *newCommands = [[NSMutableArray alloc] init];
 		[newCommands addObject:[tmp objectAtIndex:0]];
 		[newCommands addObject:[tmp objectAtIndex:1]];
+
 		//Format additional command into one
 		NSMutableString *lastCommand = [[NSMutableString alloc] init];
 		for (int i = 0;i < [tmp count]-2;i++) { [lastCommand appendFormat:@"%@",[tmp objectAtIndex:i+2]]; }
-		//
+		
+		//Remove '
 		if ([[lastCommand substringWithRange:NSMakeRange(0, 1)] isEqualToString:@"'"] && 
 			[[lastCommand substringWithRange:NSMakeRange([lastCommand length]-1, 1)] isEqualToString:@"'"]) {
 			[newCommands addObject:[lastCommand substringWithRange:NSMakeRange(1, [lastCommand length]-2)]];
 		}
 		else { [newCommands addObject:lastCommand];	}
 		[lastCommand release];
+		
 		//Set new commands array
 		*commands = [NSArray arrayWithArray:newCommands];
 		[newCommands release];
 	}
-	else { *commands = [NSArray arrayWithArray:tmp]; }
+	else { 
+		//Get last command
+		NSMutableArray *retValue = [NSMutableArray new];
+		[retValue addObjectsFromArray:[tmp subarrayWithRange:NSMakeRange(0, [tmp count]-1)]];
+		NSString *lastCommand = [tmp lastObject];
+		if ([[lastCommand substringWithRange:NSMakeRange(0, 1)] isEqualToString:@"'"] && 
+			[[lastCommand substringWithRange:NSMakeRange([lastCommand length]-1, 1)] isEqualToString:@"'"]) {
+			[retValue addObject:[lastCommand substringWithRange:NSMakeRange(1, [lastCommand length]-2)]];
+		}
+		else { [retValue addObject:lastCommand];	}
+		//Set new value
+		*commands = [NSArray arrayWithArray:retValue];
+		[retValue release];
+	}
 	return;
 }
 //Initial message filter
