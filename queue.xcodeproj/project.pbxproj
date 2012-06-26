@@ -42,9 +42,9 @@
 		4F807E181598345800905FC0 /* MessageCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCenter.m; sourceTree = "<group>"; };
 		4FEFB2B11599845700DC5D8C /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		4FEFB2B21599845700DC5D8C /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
-		4FEFB2B5159985D900DC5D8C /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../Config.h; sourceTree = "<group>"; };
 		4FEFB2B815998AB200DC5D8C /* WWQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWQueue.m; sourceTree = "<group>"; };
 		4FEFB2B915998AB200DC5D8C /* WWQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWQueue.h; sourceTree = "<group>"; };
+		4FEFB2BB15998BBF00DC5D8C /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,7 @@
 		4F807DF81596EA0B00905FC0 /* queue */ = {
 			isa = PBXGroup;
 			children = (
-				4FEFB2B5159985D900DC5D8C /* Config.h */,
+				4FEFB2BB15998BBF00DC5D8C /* Config.h */,
 				4F807E121596EE6F00905FC0 /* TDLog.h */,
 				4F807E131596EE7100905FC0 /* Queueing */,
 				4F807E0B1596ECF800905FC0 /* Helpers */,
