@@ -85,6 +85,7 @@
 		*commands = [NSArray arrayWithArray:newCommands];
 		[newCommands release];
 	}
+	else { *commands = [NSArray arrayWithArray:tmp]; }
 	return;
 }
 //Initial message filter
