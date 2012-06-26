@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface WWQueue : NSObject {
-	
+	NSRecursiveLock *locker ;	
+	NSMutableArray *queueArray;	
 }
-@property (nonatomic, retain)NSRecursiveLock *locker ;	
-@property (nonatomic, retain)NSMutableArray *queueArray;
 //
 + (WWQueue *)newQueue ;
 //Add object in queue, and return if can execute now

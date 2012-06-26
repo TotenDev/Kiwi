@@ -132,8 +132,8 @@
 		4FEFB2B715998A6F00DC5D8C /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				4FEFB2B815998AB200DC5D8C /* WWQueue.m */,
 				4FEFB2B915998AB200DC5D8C /* WWQueue.h */,
+				4FEFB2B815998AB200DC5D8C /* WWQueue.m */,
 				4FEFB2B11599845700DC5D8C /* Logger.h */,
 				4FEFB2B21599845700DC5D8C /* Logger.m */,
 			);
