@@ -17,9 +17,9 @@ typedef enum {
 //Log Levels
 typedef enum {
 	//Manager
-	kLogLevelQueue				= kLogFuncWriter|kLogFuncLog,
-	kLogLevelProcedures			= kLogFuncWriter|kLogFuncLog,
-	kLogLevelMessageCenter		= kLogFuncWriter|kLogFuncLog,
+	kLogLevelQueue				= kLogFuncWriter,
+	kLogLevelProcedures			= kLogFuncWriter,
+	kLogLevelMessageCenter		= kLogFuncWriter,
 	//
 	kLogLevelMain				= kLogFuncWriter,
 	kLogLevelStdout				= kLogFuncStdout,
