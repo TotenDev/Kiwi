@@ -7,17 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+@class WWQueue;
 @interface Logger : NSObject
 //write log
 + (void)writeLog:(NSString *)logString ;
-
 //DO NOT CALL THIS METHODS DIRECTLY
 #pragma mark - Private 
 //queue write log
 + (void)_queueWriteLog:(NSString *)logString ;
 //shared writer queue
-+ (NSOperationQueue *)_sharedLogWriterQueue ;
++ (WWQueue *)_sharedLogWriterQueue ;
 //append string into file
 + (void)_appendLogText:(NSString *)text ;
 //Check oversize file and make necessary actions to it

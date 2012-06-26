@@ -13,6 +13,7 @@
 		4F807E161597F01100905FC0 /* QueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F807E151597F01100905FC0 /* QueueManager.m */; };
 		4F807E191598345800905FC0 /* MessageCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F807E181598345800905FC0 /* MessageCenter.m */; };
 		4FEFB2B31599845700DC5D8C /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFB2B21599845700DC5D8C /* Logger.m */; };
+		4FEFB2BA15998AB200DC5D8C /* WWQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFB2B815998AB200DC5D8C /* WWQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,8 @@
 		4FEFB2B11599845700DC5D8C /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		4FEFB2B21599845700DC5D8C /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 		4FEFB2B5159985D900DC5D8C /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../Config.h; sourceTree = "<group>"; };
+		4FEFB2B815998AB200DC5D8C /* WWQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWQueue.m; sourceTree = "<group>"; };
+		4FEFB2B915998AB200DC5D8C /* WWQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWQueue.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,12 +108,11 @@
 		4F807E0B1596ECF800905FC0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				4FEFB2B715998A6F00DC5D8C /* Log */,
 				4F807E0C1596ED1000905FC0 /* RemoteProcedure.h */,
 				4F807E0D1596ED1000905FC0 /* RemoteProcedure.m */,
 				4F807E171598345800905FC0 /* MessageCenter.h */,
 				4F807E181598345800905FC0 /* MessageCenter.m */,
-				4FEFB2B11599845700DC5D8C /* Logger.h */,
-				4FEFB2B21599845700DC5D8C /* Logger.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -122,6 +124,17 @@
 				4F807E151597F01100905FC0 /* QueueManager.m */,
 			);
 			name = Queueing;
+			sourceTree = "<group>";
+		};
+		4FEFB2B715998A6F00DC5D8C /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				4FEFB2B815998AB200DC5D8C /* WWQueue.m */,
+				4FEFB2B915998AB200DC5D8C /* WWQueue.h */,
+				4FEFB2B11599845700DC5D8C /* Logger.h */,
+				4FEFB2B21599845700DC5D8C /* Logger.m */,
+			);
+			name = Log;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +192,7 @@
 				4F807E161597F01100905FC0 /* QueueManager.m in Sources */,
 				4F807E191598345800905FC0 /* MessageCenter.m in Sources */,
 				4FEFB2B31599845700DC5D8C /* Logger.m in Sources */,
+				4FEFB2BA15998AB200DC5D8C /* WWQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

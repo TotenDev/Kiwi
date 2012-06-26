@@ -7,6 +7,7 @@
 //
 
 #import "Logger.h"
+#import "WWQueue.h"
 #import "Config.h"
 
 @implementation Logger
@@ -20,13 +21,12 @@
 
 #pragma mark - Queueing
 //Status shared writer queue
-static NSOperationQueue *__sharedLogQueue = nil ;
+static WWQueue *__sharedLogQueue = nil ;
 //shared writer queue
-+ (NSOperationQueue *)_sharedLogWriterQueue {
++ (WWQueue *)_sharedLogWriterQueue {
 	@synchronized ([Logger class]){
 		if (!__sharedLogQueue) {
-			__sharedLogQueue = [[NSOperationQueue alloc] init];
-			[__sharedLogQueue setMaxConcurrentOperationCount:1];
+			__sharedLogQueue = [WWQueue newQueue];
 		}
 		return __sharedLogQueue;
 	}
@@ -34,9 +34,9 @@ static NSOperationQueue *__sharedLogQueue = nil ;
 }
 //queue write log
 + (void)_queueWriteLog:(NSString *)logString {
-	NSOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(_appendLogText:) object:logString];
-	[[self _sharedLogWriterQueue] addOperation:op];
-	[op release];
+	if ([[self _sharedLogWriterQueue] addDictionaryInQueue:[NSDictionary dictionaryWithObject:logString forKey:@"1"]]) {
+		[self _appendLogText:logString];
+	}
 }
 #pragma mark - Writer
 
@@ -71,6 +71,10 @@ static NSOperationQueue *__sharedLogQueue = nil ;
 		//Check oversize file
 		[self _checkOversizeFileLogWithSize:fileSize];
     }
+	
+	//Check for next call
+	NSDictionary *next = [[self _sharedLogWriterQueue] nextInQueue];
+	if (next) { [self _appendLogText:[next objectForKey:@"1"]]; }
 }
 //Check oversize file and make necessary actions to it
 + (void)_checkOversizeFileLogWithSize:(NSInteger)fileSize {
