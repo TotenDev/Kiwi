@@ -23,24 +23,20 @@
 static NSOperationQueue *__sharedLogQueue = nil ;
 //shared writer queue
 + (NSOperationQueue *)_sharedLogWriterQueue {
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		__sharedLogQueue = [NSOperationQueue new];
-		[__sharedLogQueue setMaxConcurrentOperationCount:1];
-	});
-	return __sharedLogQueue;
+	@synchronized ([Logger class]){
+		if (!__sharedLogQueue) {
+			__sharedLogQueue = [[NSOperationQueue alloc] init];
+			[__sharedLogQueue setMaxConcurrentOperationCount:1];
+		}
+		return __sharedLogQueue;
+	}
+	return nil ;
 }
 //queue write log
 + (void)_queueWriteLog:(NSString *)logString {
-	//Append thread info !
-	//	if ([[NSThread currentThread] name]) {
-	//		logString = [NSString stringWithFormat:@"[%@]
-	//	}
-	//
-	[[self _sharedLogWriterQueue] addOperationWithBlock:^{
-		//Write !
-		[self _appendLogText:logString];
-	}];	
+	NSOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(_appendLogText:) object:logString];
+	[[self _sharedLogWriterQueue] addOperation:op];
+	[op release];
 }
 #pragma mark - Writer
 
