@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		4F807DF71596EA0B00905FC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F807DF61596EA0B00905FC0 /* Foundation.framework */; };
 		4F807DFA1596EA0B00905FC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F807DF91596EA0B00905FC0 /* main.m */; };
-		4F807DFE1596EA0B00905FC0 /* queue.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F807DFD1596EA0B00905FC0 /* queue.1 */; };
 		4F807E0E1596ED1000905FC0 /* RemoteProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F807E0D1596ED1000905FC0 /* RemoteProcedure.m */; };
 		4F807E161597F01100905FC0 /* QueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F807E151597F01100905FC0 /* QueueManager.m */; };
 		4F807E191598345800905FC0 /* MessageCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F807E181598345800905FC0 /* MessageCenter.m */; };
+		4FEFB2B31599845700DC5D8C /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFB2B21599845700DC5D8C /* Logger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -22,7 +22,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				4F807DFE1596EA0B00905FC0 /* queue.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -33,7 +32,6 @@
 		4F807DF61596EA0B00905FC0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4F807DF91596EA0B00905FC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4F807DFC1596EA0B00905FC0 /* queue-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "queue-Prefix.pch"; sourceTree = "<group>"; };
-		4F807DFD1596EA0B00905FC0 /* queue.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = queue.1; sourceTree = "<group>"; };
 		4F807E0C1596ED1000905FC0 /* RemoteProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteProcedure.h; sourceTree = "<group>"; };
 		4F807E0D1596ED1000905FC0 /* RemoteProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteProcedure.m; sourceTree = "<group>"; };
 		4F807E121596EE6F00905FC0 /* TDLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDLog.h; sourceTree = "<group>"; };
@@ -41,6 +39,9 @@
 		4F807E151597F01100905FC0 /* QueueManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueueManager.m; sourceTree = "<group>"; };
 		4F807E171598345800905FC0 /* MessageCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCenter.h; sourceTree = "<group>"; };
 		4F807E181598345800905FC0 /* MessageCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCenter.m; sourceTree = "<group>"; };
+		4FEFB2B11599845700DC5D8C /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		4FEFB2B21599845700DC5D8C /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
+		4FEFB2B5159985D900DC5D8C /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../Config.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +84,11 @@
 		4F807DF81596EA0B00905FC0 /* queue */ = {
 			isa = PBXGroup;
 			children = (
+				4FEFB2B5159985D900DC5D8C /* Config.h */,
 				4F807E121596EE6F00905FC0 /* TDLog.h */,
 				4F807E131596EE7100905FC0 /* Queueing */,
 				4F807E0B1596ECF800905FC0 /* Helpers */,
 				4F807DF91596EA0B00905FC0 /* main.m */,
-				4F807DFD1596EA0B00905FC0 /* queue.1 */,
 				4F807DFB1596EA0B00905FC0 /* Supporting Files */,
 			);
 			path = queue;
@@ -108,6 +109,8 @@
 				4F807E0D1596ED1000905FC0 /* RemoteProcedure.m */,
 				4F807E171598345800905FC0 /* MessageCenter.h */,
 				4F807E181598345800905FC0 /* MessageCenter.m */,
+				4FEFB2B11599845700DC5D8C /* Logger.h */,
+				4FEFB2B21599845700DC5D8C /* Logger.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				4F807E0E1596ED1000905FC0 /* RemoteProcedure.m in Sources */,
 				4F807E161597F01100905FC0 /* QueueManager.m in Sources */,
 				4F807E191598345800905FC0 /* MessageCenter.m in Sources */,
+				4FEFB2B31599845700DC5D8C /* Logger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +267,7 @@
 				4F807E031596EA0B00905FC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
