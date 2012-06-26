@@ -18,7 +18,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
         $message->send();
 
         msg_receive($queue->getId(), 0, $type, 10000, $results, true);
-        $this->assertEquals('MyTestQueue||/var/www/test.php||"test anotherTest"', $results);
+        $this->assertEquals("MyTestQueue||/var/www/test.php||'test anotherTest'", $results);
         $this->assertEquals(1, $type);
     }
 }
