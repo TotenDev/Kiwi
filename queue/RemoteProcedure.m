@@ -29,36 +29,51 @@
 }
 - (void)executeWithResponse:(NSString **)response {
 	NSAutoreleasePool * pooler = [[NSAutoreleasePool alloc] init];
-		//Get execution 
-		NSString *whereExecute = [[NSString stringWithString:[self executionCommand]] retain];
-		NSPipe *procedureOutput = [NSPipe pipe];
-		NSPipe *procedureOutputError = [NSPipe pipe];
-		NSArray *procedureParams = [(params ? [NSArray arrayWithObjects:filePath,params,nil] : [NSArray arrayWithObject:filePath]) retain];
+	NSTask *theTask;
+	NSPipe *procedureOutput,*procedureOutputError;
+	NSString *whereExecute;
+	NSArray *procedureParams ;
+	//Get execution ivars
+	{
+		whereExecute = [[NSString stringWithString:[self executionCommand]] retain];
+		procedureOutput = [NSPipe pipe];
+		procedureOutputError = [NSPipe pipe];
+		procedureParams = [(params ? [NSArray arrayWithObjects:filePath,params,nil] : [NSArray arrayWithObject:filePath]) retain];
 		TDLog(kLogLevelProcedures,nil,@"Starting Procedure");
+	}
+	//Task
+	{
 		//Task it
-		NSTask *theTask = [[NSTask alloc]init];
+		theTask = [[NSTask alloc]init];
 		[theTask setLaunchPath:whereExecute];
 		[theTask setArguments:procedureParams];
 		[theTask setStandardOutput:procedureOutput];
 		[theTask setStandardError:procedureOutputError];
 		[theTask launch];
 		[theTask waitUntilExit];
-		//Read pipe
+	}
+	//Read pipe
+	{
 		NSFileHandle *readHandleOut = [procedureOutput fileHandleForReading];
 		NSData *readDataOut = [readHandleOut readDataToEndOfFile];
 		*response = [[NSString alloc] initWithData:readDataOut encoding:NSUTF8StringEncoding];
 		TDLog(kLogLevelProcedures,nil,@"Procedure finished with response:%@",*response);
-		//Error Pipe
+	}
+	//Error Pipe
+	{
 		NSFileHandle *readHandleError = [procedureOutput fileHandleForReading];
 		NSData *readDataError = [readHandleError readDataToEndOfFile];
 		NSString *error = [[NSString alloc] initWithData:readDataError encoding:NSUTF8StringEncoding];
-		if (error && readDataError) { TDLog(kLogLevelProcedures,nil,@"Procedure finished with error:%@",error); }
+		if (error && [readDataError length] > 0) { TDLog(kLogLevelProcedures,nil,@"Procedure finished with error:%@",error); }
 		[error release];
-		//clean jobs
+	}
+	//clean jobs
+	{
 		[procedureParams release];
 		[whereExecute release];
 		[theTask release];
-	[pooler release];
+		[pooler release];
+	}
 }
 #pragma mark - Helpers
 - (NSString *)executionCommand {

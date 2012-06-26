@@ -79,7 +79,12 @@
 		//Format additional command into one
 		NSMutableString *lastCommand = [[NSMutableString alloc] init];
 		for (int i = 0;i < [tmp count]-2;i++) { [lastCommand appendFormat:@"%@",[tmp objectAtIndex:i+2]]; }
-		[newCommands addObject:lastCommand];
+		//
+		if ([[lastCommand substringWithRange:NSMakeRange(0, 1)] isEqualToString:@"'"] && 
+			[[lastCommand substringWithRange:NSMakeRange([lastCommand length]-1, 1)] isEqualToString:@"'"]) {
+			[newCommands addObject:[lastCommand substringWithRange:NSMakeRange(1, [lastCommand length]-2)]];
+		}
+		else { [newCommands addObject:lastCommand];	}
 		[lastCommand release];
 		//Set new commands array
 		*commands = [NSArray arrayWithArray:newCommands];

@@ -22,7 +22,6 @@
 //Declarations
 void runQueue(void) ; //Run queue app
 void scanCommands (int argc,const char *argv[]) ; //scan for basic commands into kiwi
-static NSString * executablePath(void) ; //executable path
 //App
 int main(int argc, const char * argv[]) {
 	//Pool
