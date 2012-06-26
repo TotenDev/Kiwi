@@ -34,7 +34,7 @@ static WWQueue *__sharedLogQueue = nil ;
 }
 //queue write log
 + (void)_queueWriteLog:(NSString *)logString {
-	if ([[self _sharedLogWriterQueue] addDictionaryInQueue:[NSDictionary dictionaryWithObject:logString forKey:@"1"]]) {
+	if ([[self _sharedLogWriterQueue] addDictionaryInQueue:[NSDictionary dictionaryWithObject:[logString copy] forKey:@"1"]]) {
 		[self _appendLogText:logString];
 	}
 }
@@ -75,6 +75,7 @@ static WWQueue *__sharedLogQueue = nil ;
 	//Check for next call
 	NSDictionary *next = [[self _sharedLogWriterQueue] nextInQueue];
 	if (next) { [self _appendLogText:[next objectForKey:@"1"]]; }
+	[next release];
 }
 //Check oversize file and make necessary actions to it
 + (void)_checkOversizeFileLogWithSize:(NSInteger)fileSize {

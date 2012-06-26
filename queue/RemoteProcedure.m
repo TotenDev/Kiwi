@@ -16,16 +16,16 @@
 }
 - (id)initProcedureWithPath:(NSString *)_filePath andParameters:(NSString *)_params {
 	if ((self = [super init])) {
-		params = [_params copy];
-		filePath = [_filePath copy];
-		TDLog(kLogLevelProcedures,nil,@"New procedure with filepath: %@ and params",filePath,params);
+		params = (_params ? [_params copy] : nil);
+		filePath = (_filePath ? [_filePath copy] : nil );
+		TDLog(kLogLevelProcedures,nil,@"New procedure with filepath:%@ and params:%@",filePath,params);
 	}
 	return self;
 }
 - (void)dealloc {
+	if (params)[params release];
+	if (filePath)[filePath release];
 	[super dealloc];
-	[params release];
-	[filePath release];
 }
 - (void)executeWithResponse:(NSString **)response {
 	//Get execution 
