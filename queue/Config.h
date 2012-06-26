@@ -8,4 +8,4 @@
 
 #define logFilePath @"/var/log/kiwi/kiwi-log"
 #define logPath @"/var/log/kiwi/"
-#define maLogFileSize 5000
+#define maLogFileSize 500000
