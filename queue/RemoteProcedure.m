@@ -28,24 +28,29 @@
 	[super dealloc];
 }
 - (void)executeWithResponse:(NSString **)response {
-	//Get execution 
-	NSString *whereExecute = [NSString stringWithString:[self executionCommand]];
-	NSPipe *procedureOutput = [NSPipe pipe];
-	TDLog(kLogLevelProcedures,nil,@"Starting Procedure");
-	//Task it
-	NSTask *theTask = [[NSTask alloc]init];
-	[theTask setLaunchPath:whereExecute];
-	[theTask setArguments:(params ? [NSArray arrayWithObjects:filePath,params,nil] : [NSArray arrayWithObject:filePath])];
-	[theTask setStandardOutput:procedureOutput];
-	[theTask launch];
-	[theTask waitUntilExit];
-	//Read pipe
-	NSFileHandle *readHandle = [procedureOutput fileHandleForReading];
-	NSData *readData = [readHandle readDataToEndOfFile];
-	*response = [[NSString alloc] initWithData:readData encoding:NSUTF8StringEncoding];
-	TDLog(kLogLevelProcedures,nil,@"Procedure finished with response:%@",*response);
-	//clean jobs
-	[theTask release];
+	NSAutoreleasePool * pooler = [[NSAutoreleasePool alloc] init];
+		//Get execution 
+		NSString *whereExecute = [[NSString stringWithString:[self executionCommand]] retain];
+		NSPipe *procedureOutput = [NSPipe pipe];
+		NSArray *procedureParams = [(params ? [NSArray arrayWithObjects:filePath,params,nil] : [NSArray arrayWithObject:filePath]) retain];
+		TDLog(kLogLevelProcedures,nil,@"Starting Procedure");
+		//Task it
+		NSTask *theTask = [[NSTask alloc]init];
+		[theTask setLaunchPath:whereExecute];
+		[theTask setArguments:procedureParams];
+		[theTask setStandardOutput:procedureOutput];
+		[theTask launch];
+		[theTask waitUntilExit];
+		//Read pipe
+		NSFileHandle *readHandle = [procedureOutput fileHandleForReading];
+		NSData *readData = [readHandle readDataToEndOfFile];
+		*response = [[NSString alloc] initWithData:readData encoding:NSUTF8StringEncoding];
+		TDLog(kLogLevelProcedures,nil,@"Procedure finished with response:%@",*response);
+		//clean jobs
+		[procedureParams release];
+		[whereExecute release];
+		[theTask release];
+	[pooler release];
 }
 #pragma mark - Helpers
 - (NSString *)executionCommand {
@@ -73,6 +78,8 @@
 	}
 	[dataString release];
 	TDLog(kLogLevelProcedures,nil,@"Execution commnad:%@",finder);
-	return [finder autorelease];
+	NSString *retValue = [NSString stringWithString:finder];
+	[finder release];
+	return retValue;
 }
 @end

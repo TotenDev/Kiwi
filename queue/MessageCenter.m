@@ -64,21 +64,21 @@
 	if (*error) { return; }
 	TDLog(kLogLevelQueue,nil,@"decoded message:%@",messageString);
 	//Try to get commands
-	*commands = [messageString componentsSeparatedByString:@"||"];
-	if ([*commands count] < 2) {
+	NSArray *tmp = [messageString componentsSeparatedByString:@"||"];
+	if ([tmp count] < 2) {
 		*error = [NSError errorWithDomain:@"MessageCenter error domain" code:01 userInfo:
 				  [NSDictionary dictionaryWithObject:
-				   [NSString stringWithFormat:@"Commands counts(%i) in under required",[*commands count]] 
+				   [NSString stringWithFormat:@"Commands counts(%i) in under required",[tmp count]] 
 											  forKey:NSLocalizedFailureReasonErrorKey]];
 		return;
 	}
-	else if ([*commands count] > 3) {
+	else if ([tmp count] > 3) {
 		NSMutableArray *newCommands = [[NSMutableArray alloc] init];
-		[newCommands addObject:[*commands objectAtIndex:0]];
-		[newCommands addObject:[*commands objectAtIndex:1]];
+		[newCommands addObject:[tmp objectAtIndex:0]];
+		[newCommands addObject:[tmp objectAtIndex:1]];
 		//Format additional command into one
 		NSMutableString *lastCommand = [[NSMutableString alloc] init];
-		for (int i = 0;i < [*commands count]-2;i++) { [lastCommand appendFormat:@"%@",[*commands objectAtIndex:i+2]]; }
+		for (int i = 0;i < [tmp count]-2;i++) { [lastCommand appendFormat:@"%@",[tmp objectAtIndex:i+2]]; }
 		[newCommands addObject:lastCommand];
 		[lastCommand release];
 		//Set new commands array

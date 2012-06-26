@@ -12,6 +12,7 @@
 //Main Implementation
 @implementation WWQueue
 @synthesize queueArray;
+@synthesize locker;
 //New queue
 + (WWQueue *)newQueue { return [[self alloc] init]; }
 //Init
@@ -19,7 +20,7 @@
 	if ((self = [super init])) {
 		//queue array
 		self.queueArray = [[NSMutableArray alloc] init];
-		locker = [[NSRecursiveLock alloc] init];
+		self.locker = [[NSRecursiveLock alloc] init];
 	}
 	//return baby
 	return self;
@@ -27,7 +28,7 @@
 //hm....
 - (void)dealloc {
 	[super dealloc];
-	[locker release];
+	[self.locker release];
 	[self.queueArray release];
 }
 #pragma mark - Real queue
@@ -35,7 +36,7 @@
 - (BOOL)addDictionaryInQueue:(NSDictionary *)queueDict {
 	[locker lock];
 	//Add it
-	[self.queueArray addObject:[queueDict retain]];
+	[self.queueArray addObject:[queueDict copy]];
 	//Return if can execute now
 	BOOL response = ([self.queueArray count] == 1 ? YES : NO);
 	//
@@ -54,7 +55,7 @@
 	//Return if available
 	id response = ([self.queueArray count] != 0 ? [[self.queueArray objectAtIndex:0] copy] : nil);
 	[locker unlock];
-	return response;
+	return [response autorelease];
 }
 //Remove all objects in queue AND return last one in queue
 - (NSDictionary *)lastInQueue {
@@ -67,6 +68,6 @@
 	[self.queueArray removeAllObjects];
 	[locker unlock];
 	//return value
-	return retValue;
+	return [retValue autorelease];
 }
 @end

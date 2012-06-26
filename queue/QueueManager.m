@@ -107,9 +107,9 @@ static QueueManager *_sharedQueueManager = nil ;
 	if ([[_queues allKeys] containsObject:queueID]) { 
 		NSMutableArray *queue = [_queues objectForKey:queueID];
 		if ([queue count] > 0) {
-			NSDictionary *retValue = [queue objectAtIndex:0];
+			NSDictionary *retValue = [[queue objectAtIndex:0] copy];
 			[_queueLocker unlock];
-			return retValue;	
+			return [retValue autorelease];	
 		}
 		else { [_queueLocker unlock]; }
 	}	
@@ -119,14 +119,15 @@ static QueueManager *_sharedQueueManager = nil ;
 #pragma mark - Proceduring
 - (void)runProcedureQueueWithID:(NSString *)queueID {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	queueID = [queueID retain];
 	BOOL hasJob = YES ;
-	TDLog(kLogLevelQueue,nil,@"now running deticated thread for queue with id:%@",queueID);
+	TDLog(kLogLevelQueue,nil,[NSString stringWithFormat:@"now running deticated thread for queue with id:%@",queueID]);
 	while (hasJob) {
 		//
 		NSAutoreleasePool *pool2 = [[NSAutoreleasePool alloc] init];
 		NSDictionary *jobDict = [self procedureOfQueueID:queueID];
 		if (jobDict) {
-			TDLog(kLogLevelQueue,nil,@"will run procedure:%@ in thread of queue with id%@:",jobDict,queueID);
+			TDLog(kLogLevelQueue,nil,[NSString stringWithFormat:@"will run procedure:%@ in thread of queue with id%@:",jobDict,queueID]);
 			RemoteProcedure *procedure = [jobDict objectForKey:@"procedure"];
 			NSString *response ;
 			id targetCallback = [jobDict objectForKey:@"callback"];
@@ -139,7 +140,7 @@ static QueueManager *_sharedQueueManager = nil ;
 				}
 				[response release];
 			}
-			@catch (NSException *exception) { TDLog(kLogLevelQueue,nil,@"procedure:%@ in thread of queue with id:%@ exit with exception:%@\nSkiping to next procedure.",jobDict,queueID,exception); }
+			@catch (NSException *exception) { TDLog(kLogLevelQueue,nil,[NSString stringWithFormat:@"procedure:%@ in thread of queue with id:%@ exit with exception:%@\nSkiping to next procedure.",jobDict,queueID,exception]); }
 			//remove procedure of this queue
 			jobDict = nil;
 			NSString *nextQueueID = [self removeProcedureWithQueueID:queueID];
@@ -149,6 +150,7 @@ static QueueManager *_sharedQueueManager = nil ;
 		else hasJob = NO ;
 		[pool2 drain];
 	}
+	[queueID release];
 	[pool drain];
 }
 
