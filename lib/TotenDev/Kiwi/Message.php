@@ -36,7 +36,7 @@ class Message
     public function getArgs()
     {
         $args = implode(' ', $this->args);
-        return "\"$args\"";
+        return "'$args'";
     }
 
     public function send()

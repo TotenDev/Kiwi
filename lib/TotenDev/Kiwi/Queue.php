@@ -12,7 +12,7 @@ class Queue
     {
         $this->key = $key;
         $this->name = $name;
-        $this->id = msg_get_queue($this->key, 0666);
+        $this->id = msg_get_queue($this->key, 0777);
     }
 
     public function getId()
