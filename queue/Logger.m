@@ -48,8 +48,9 @@ static WWQueue *__sharedLogQueue = nil ;
     if (![fileManager fileExistsAtPath:logFilePath]) {
         // the file doesn't exist yet, so we can just write out the text using the 
         // NSString convenience method
-        NSError *error = nil;
-		[text writeToFile:logFilePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+//        NSError *error = nil;
+		[text writeToFile:logFilePath atomically:YES];
+//		[text writeToFile: atomically:YES encoding:NSUTF8StringEncoding error:&error];
     } 
 	else {
         // get a handle to the file
