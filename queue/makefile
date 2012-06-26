@@ -21,3 +21,13 @@ hist: $(OBJ)
 	@rm -rf *.d *.o
 	@echo "[done]"
 
+clean:
+	@echo -n "Cleaning... "
+	@rm -rf *.d *.o kiwid
+	@echo "[done]"
+
+install:
+	@echo -n "Coping to /usr/bin ... "
+	@sudo cp kiwid /usr/bin
+	@echo "[done]"
+
