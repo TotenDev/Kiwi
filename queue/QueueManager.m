@@ -8,7 +8,7 @@
 
 #import "QueueManager.h"
 #import "TDLog.h"
-
+#import "Config.h"
 
 
 
@@ -58,19 +58,24 @@ static QueueManager *_sharedQueueManager = nil ;
 		queue = [_queues objectForKey:queueID]; 
 	}
 	else { 
-		TDLog(kLogLevelQueue,nil,@"Creating queue with id:%@ and detaching new thread for it",queueID);
 		//init queue
 		queue = [[[NSMutableArray alloc] init] autorelease];
 		//add into queue manager
 		[_queues setObject:queue forKey:queueID];
-		//run procedure thread
-		[NSThread detachNewThreadSelector:@selector(runProcedureQueueWithID:) toTarget:self withObject:queueID];
+		if ([[_queues allKeys] count] <= maxNumberOfConcurrencyProcedures) {
+			TDLog(kLogLevelQueue,nil,@"Creating queue with id:%@ and detaching new thread for it",queueID);
+			//run procedure thread
+			[NSThread detachNewThreadSelector:@selector(runProcedureQueueWithID:) toTarget:self withObject:queueID];	
+		}
+		else {
+			TDLog(kLogLevelQueue,nil,@"Max number of concurrency procedures reached (%i),waiting for a queue to finish to execute queue with id:%@.",maxNumberOfConcurrencyProcedures,queueID);
+		}
 	}
 	//add procedure into queue
 	[queue addObject:queueProcedure];
 	[_queueLocker unlock];
 }
-- (void)removeProcedureWithQueueID:(NSString *)queueID {
+- (NSString *)removeProcedureWithQueueID:(NSString *)queueID {
 	[_queueLocker lock];
 	//Check if contains a queue with that ID
 	if ([[_queues allKeys] containsObject:queueID]) { 
@@ -84,9 +89,17 @@ static QueueManager *_sharedQueueManager = nil ;
 		if ([queue count] == 0) { 
 			[_queues removeObjectForKey:queueID]; 
 			TDLog(kLogLevelQueue,nil,@"queue with id:%@ does not have procedures on queue, removing thread of it.",queueID);
+			//Check for waiting queue
+			if ([[_queues allKeys] count] >= maxNumberOfConcurrencyProcedures) { 
+				NSString *str = [[[_queues allKeys] objectAtIndex:maxNumberOfConcurrencyProcedures-1] copy];
+				TDLog(kLogLevelQueue,nil,@"resuming queue with id:%@",str);
+				[_queueLocker unlock];
+				return [str autorelease]; 
+			}
 		}
 	}
 	[_queueLocker unlock];
+	return nil;
 }
 - (NSDictionary *)procedureOfQueueID:(NSString *)queueID {
 	[_queueLocker lock];
@@ -129,7 +142,9 @@ static QueueManager *_sharedQueueManager = nil ;
 			@catch (NSException *exception) { TDLog(kLogLevelQueue,nil,@"procedure:%@ in thread of queue with id:%@ exit with exception:%@\nSkiping to next procedure.",jobDict,queueID,exception); }
 			//remove procedure of this queue
 			jobDict = nil;
-			[self removeProcedureWithQueueID:queueID];
+			NSString *nextQueueID = [self removeProcedureWithQueueID:queueID];
+			//Check for waiting queues
+			if (nextQueueID) { [self runProcedureQueueWithID:nextQueueID]; }
 		}
 		else hasJob = NO ;
 		[pool2 drain];

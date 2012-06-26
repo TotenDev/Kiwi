@@ -8,4 +8,6 @@
 
 #define logFilePath @"/var/log/kiwi/kiwi-log"
 #define logPath @"/var/log/kiwi/"
-#define maLogFileSize 500000
+#define logFileSize 500000
+#define ipcQueueKey 9076
+#define maxNumberOfConcurrencyProcedures 2

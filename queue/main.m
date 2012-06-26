@@ -7,13 +7,7 @@
 //
 
 #warning TODO
-//Logging write
 //Response mode
-//Config File
-	//thread count
-	//key queue
-		//msg types (white card too)
-	//log file
 //get initial line of procedure file
 //Help
 
@@ -55,7 +49,7 @@ void scanCommands (int argc,const char *argv[]) {
 		NSString * chk = [NSString stringWithFormat:@"%s",*argv++];//check str
 		//Version check
 		if ([KiwiVersionCmds containsObject:chk]) { 
-			TDLog(kLogLevelStdout,nil,KiwiVersion);
+			TDLog(kLogLevelStdout,nil,@"Kiwi version:%@\nCopyright:TotenDev LTDA.",KiwiVersion);
 			[babyPool drain];//final pool
 			exit(EXIT_SUCCESS); //bye
 		}

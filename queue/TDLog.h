@@ -17,9 +17,9 @@ typedef enum {
 //Log Levels
 typedef enum {
 	//Manager
-	kLogLevelQueue				= kLogFuncWriter,
-	kLogLevelProcedures			= kLogFuncWriter,
-	kLogLevelMessageCenter		= kLogFuncWriter,
+	kLogLevelQueue				= kLogFuncWriter|kLogFuncLog,
+	kLogLevelProcedures			= kLogFuncWriter|kLogFuncLog,
+	kLogLevelMessageCenter		= kLogFuncWriter|kLogFuncLog,
 	//
 	kLogLevelMain				= kLogFuncWriter,
 	kLogLevelStdout				= kLogFuncStdout,
@@ -34,7 +34,8 @@ typedef enum {
 // Log current file location
 #define CurrentFileLocation [NSString stringWithFormat:@"%s[l:%d]",__PRETTY_FUNCTION__, __LINE__]
 // Normal log
-#define __TDLog(...) NSLog(@"%s[l:%d] %@", __PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:__VA_ARGS__])
+//#define __TDLog(...) NSLog(@"%s[l:%d] %@", __PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:__VA_ARGS__])
+#define __TDLog(...) NSLog(@"%@",[NSString stringWithFormat:__VA_ARGS__])
 //Stdout
 #define __TDStdout(...) NSLog(@" %@", [NSString stringWithFormat:__VA_ARGS__])
 // Assertion Log

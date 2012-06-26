@@ -10,18 +10,18 @@
 #import "TDLog.h"
 #import "RemoteProcedure.h"
 #import "QueueManager.h"
+#import "Config.h"
 
 @implementation MessageCenter
 
 - (void)runLoop {
 	TDLog(kLogLevelMessageCenter,nil,@"Starting MessageCenter runloop");
-	static key_t key = 9076;  
+	static key_t key = ipcQueueKey;  
 	while (YES) {
 		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		int msqid;  
 		struct msgbuf rcvbuffer; 
-		
-		if ((msqid = msgget(key, 0666)) >= 0) {
+		if ((msqid = msgget(key, 0777)) >= 0) {
 			size_t msgSize = 0;
 			//Receive an answer of message type 1.  
 			while ((msgSize=msgrcv(msqid, &rcvbuffer, sizeof(rcvbuffer.mtext), 1, IPC_NOWAIT)) != -1) {
@@ -43,10 +43,10 @@
 					[procedure release];
 				}
 			}	
-			//Remove queue
-			if (msgctl(msqid,IPC_RMID,NULL) < 0) {
-				TDLog(kLogLevelMessageCenter,nil,@"Failed to remove queue with error:%s",strerror(errno));
-			}
+//			//Remove queue
+//			if (msgctl(msqid,IPC_RMID,NULL) < 0) {
+//				TDLog(kLogLevelMessageCenter,nil,@"Failed to remove queue with error:%s",strerror(errno));
+//			}
 		}
 		[NSThread sleepForTimeInterval:.1f];
 		[pool drain];

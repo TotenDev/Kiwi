@@ -79,7 +79,7 @@ static WWQueue *__sharedLogQueue = nil ;
 //Check oversize file and make necessary actions to it
 + (void)_checkOversizeFileLogWithSize:(NSInteger)fileSize {
 	//Check if file have more bytes than allowed in storage
-	if (fileSize > maLogFileSize) {
+	if (fileSize > logFileSize) {
 		//Get Timestamp
 		NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
 		NSString *newFilePath = [logFilePath stringByAppendingFormat:@"%i",timestamp];
