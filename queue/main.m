@@ -9,14 +9,14 @@
 #warning TODO
 //Response mode
 //get initial line of procedure file
-//Help
+//exit code signal response (exiting smoth with all runloops and process)
 
 #import <Foundation/Foundation.h>
 #import "QueueManager.h"
 #import "MessageCenter.h"
 #import "TDLog.h"
 //App Definitions
-#define KiwiVersion @"0.0.2a"
+#define KiwiVersion @"0.0.21"
 #define KiwiVersionCmds [NSArray arrayWithObjects:@"-v",@"-V",@"--version",@"--Version",nil]
 
 //Declarations
@@ -48,7 +48,7 @@ void scanCommands (int argc,const char *argv[]) {
 		NSString * chk = [NSString stringWithFormat:@"%s",*argv++];//check str
 		//Version check
 		if ([KiwiVersionCmds containsObject:chk]) { 
-			TDLog(kLogLevelStdout,nil,@"Kiwi version:%@\nCopyright:TotenDev LTDA.",KiwiVersion);
+			TDLog(kLogLevelStdout,nil,@"\nKiwi version:%@\nCopyright:TotenDev LTDA.",KiwiVersion);
 			[babyPool drain];//final pool
 			exit(EXIT_SUCCESS); //bye
 		}

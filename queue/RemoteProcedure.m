@@ -11,6 +11,7 @@
 
 //Main Implementation
 @implementation RemoteProcedure
+#pragma mark - Environment Methods
 + (RemoteProcedure *)newProcedureWithPath:(NSString *)path andParams:(NSString *)params {
 	return [[self alloc] initProcedureWithPath:path andParameters:params];
 }
@@ -27,12 +28,14 @@
 	if (filePath)[filePath release];
 	[super dealloc];
 }
+- (NSString *)description {
+	return [NSString stringWithFormat:@"[%@<0x%x>] command:%@ filePath:%@ params:%@",NSStringFromClass([self class]),self,[self executionCommand],filePath,params];
+}
+
+#pragma mark - Main Methods
 - (void)executeWithResponse:(NSString **)response {
 	NSAutoreleasePool * pooler = [[NSAutoreleasePool alloc] init];
-	NSTask *theTask;
-	NSPipe *procedureOutput,*procedureOutputError;
-	NSString *whereExecute;
-	NSArray *procedureParams ;
+	NSTask *theTask; NSPipe *procedureOutput,*procedureOutputError; NSString *whereExecute; NSArray *procedureParams ;
 	//Get execution ivars
 	{
 		whereExecute = [[NSString stringWithString:[self executionCommand]] retain];
@@ -57,14 +60,14 @@
 		NSFileHandle *readHandleOut = [procedureOutput fileHandleForReading];
 		NSData *readDataOut = [readHandleOut readDataToEndOfFile];
 		*response = [[NSString alloc] initWithData:readDataOut encoding:NSUTF8StringEncoding];
-		TDLog(kLogLevelProcedures,nil,@"Procedure finished with response:%@",*response);
+		TDLog(kLogLevelProcedures,nil,@"Procedure finished with stdout: %@",*response);
 	}
 	//Error Pipe
 	{
 		NSFileHandle *readHandleError = [procedureOutput fileHandleForReading];
 		NSData *readDataError = [readHandleError readDataToEndOfFile];
 		NSString *error = [[NSString alloc] initWithData:readDataError encoding:NSUTF8StringEncoding];
-		if (error && [readDataError length] > 0) { TDLog(kLogLevelProcedures,nil,@"Procedure finished with error:%@",error); }
+		if (error && [error length] > 0) { TDLog(kLogLevelProcedures,nil,@"Procedure stderr: %@",error); }
 		[error release];
 	}
 	//clean jobs
@@ -72,10 +75,12 @@
 		[procedureParams release];
 		[whereExecute release];
 		[theTask release];
-		[pooler release];
+		[pooler drain];
 	}
 }
+
 #pragma mark - Helpers
+//required medium processing and IO, so use carefull
 - (NSString *)executionCommand {
 	NSFileHandle *reader = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
 	NSData *readData = [reader readDataOfLength:2048*4]; //first line
@@ -100,7 +105,6 @@
 		if (state == 2) { break; }
 	}
 	[dataString release];
-	TDLog(kLogLevelProcedures,nil,@"Execution commnad:%@",finder);
 	NSString *retValue = [NSString stringWithString:finder];
 	[finder release];
 	return retValue;

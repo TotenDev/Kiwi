@@ -6,8 +6,12 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#define __YES 1
+#define __NO 0
+
 #define logFilePath @"/var/log/kiwi/kiwi-log"
 #define logPath @"/var/log/kiwi/"
 #define logFileSize 500000
 #define ipcQueueKey 9076
 #define maxNumberOfConcurrencyProcedures 2
+#define optimizedMode __NO

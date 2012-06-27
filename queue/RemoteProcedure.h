@@ -13,11 +13,12 @@
 	NSString *params ;
 }
 
+#pragma mark - Environment Methods
 + (RemoteProcedure *)newProcedureWithPath:(NSString *)path andParams:(NSString *)params ;
-- (void)executeWithResponse:(NSString **)response ;
-
-
-#pragma mark - Private
 - (id)initProcedureWithPath:(NSString *)_filePath andParameters:(NSString *)_params ;
-- (NSString *)executionCommand;
+#pragma mark - 
+//Main Method for execution
+- (void)executeWithResponse:(NSString **)response ;
+#pragma mark - Private
+- (NSString *)executionCommand; //required medium processing and IO, so use carefull
 @end
