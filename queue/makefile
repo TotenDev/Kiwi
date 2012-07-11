@@ -21,6 +21,11 @@ hist: $(OBJ)
 	@rm -rf *.d *.o
 	@echo "[done]"
 
+test:
+	@echo -n "Testing... "
+	./kiwid
+	@echo "[done]"
+
 clean:
 	@echo -n "Cleaning... "
 	@rm -rf *.d *.o kiwid
