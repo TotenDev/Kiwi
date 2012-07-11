@@ -49,7 +49,7 @@ But you can still sending very simple messages through php:
         $message[] = "/var/worker.php";
         $message[] = "--test";
 
-        if (!msg_send ($msg_id, 1, implode('||', $message), true, true, $msg_err))
+        if (!msg_send ($msg_id, 1, implode('||', $message), true, 0, $msg_err))
         echo "Msg not sent because $msg_err\n";
 	
 There are four important pieces in sending messages:
