@@ -1,9 +1,0 @@
-language: node_js
-
-before_script:
-
-  - "cd queue"
-  - "make"
-
-script:
-  - "make test"
