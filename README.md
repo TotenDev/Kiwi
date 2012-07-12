@@ -15,15 +15,15 @@ To run Kiwi you MUST have GNU Step configured and running on server. All prefere
 
 After configured your environment follow steps below to get Kiwi working.
 
-1.Compile it
+Compile it
 
 	1.make
 	
-2.Install it (it'll be moved to `/usr/bin/`)
+Install it (it'll be moved to `/usr/bin/`)
 
 	$ make install
 	
-3.Start kiwid process
+Start kiwid process
 
 
 	$ kiwid
@@ -65,9 +65,7 @@ When you are sending the message, you have four parameters to send:
 
 There are some wrappers to send message to Kiwi Queue as:
 
-Kiwi PHP (not available yet)
-
-Kiwi NodeJS(not available yet)
+[Kiwi NodeJS](https://github.com/TotenDev/Kiwi-LibNode/)
 
 [Kiwi Ruby](https://github.com/TotenDev/Kiwi-LibRuby/)
 
