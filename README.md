@@ -79,4 +79,4 @@ There are some wrappers to send message to Kiwi Queue as:
 
 ##License
 
-[GNU GENERAL PUBLIC LICENSE V3](Kiwi/raw/master/LICENSE)
+[GPLv3](https://github.com/TotenDev/Kiwi/blob/master/LICENSE)
