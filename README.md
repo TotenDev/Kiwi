@@ -30,7 +30,7 @@ Start kiwid process
 
 ##Configuration
 
-All Configuration can be done through `Config.h` file in root three.
+All Configuration can be done through `Config.h` file in root directory.
 
 - `logFilePath` - Log Full File Path. **REQUIRED**
 - `logPath` - Log Path, used to store old log files. **REQUIRED**
@@ -44,7 +44,7 @@ Kiwi is based on IPC message queue, and is designed to fast and reliable message
 
 Basically Kiwi, queue all messages with same queue identifier and execute then FIFO, so you can have multiple process in different queues and not worry about opening to much threads or waiting for child process to finish. :)
 
-When you send a message to Kiwi, can be thousands of messages (with same queue id) waiting to execute before you, meaning that it can take hours to execute your message. By this we must have a piece of code to execute in local files as scripts, so we can assure that our message will be executed when it can.
+When you send a message to Kiwi, can be thousands of messages (with same queue id) waiting to execute before you, meaning that it can take hours to execute your message. At this point we must have a piece of code to execute in local files as scripts, so we can assure that our message will be executed when it can.
 
 When you are sending the message, you have four parameters to send:
 
@@ -57,9 +57,9 @@ When you are sending the message, you have four parameters to send:
 
 - Can have multiple Kiwi queues running on same environment. (shouldn't be necessary)
 - No CPU usage when idle.
-- Execute any language script (since installed on environment).
-- Allows thousands of messages in on process.
-- Message run time concurrency control.
+- Execute any language script (once installed on environment).
+- Allows thousands of messages in one process.
+- Message runtime concurrency control.
 
 ##Wrappers
 
