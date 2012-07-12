@@ -53,7 +53,7 @@ When you are sending the message, you have four parameters to send:
 - `Worker FilePath` - This is the worker which will be executed by Kiwi.
 - `Worker Parameters` - (Will be the worker parameters when it get reached by Kiwi queue.
 
-##Features:
+##Features
 
 - Can have multiple Kiwi queues running on same environment. (shouldn't be necessary)
 - No CPU usage when idle.
