@@ -5,11 +5,6 @@
 // see LICENSE for details.
 //
 
-#warning TODO
-//Response mode
-//get initial line of procedure file
-//exit code signal response (exiting smoth with all runloops and process)
-
 #import <Foundation/Foundation.h>
 #import "QueueManager.h"
 #import "MessageCenter.h"
