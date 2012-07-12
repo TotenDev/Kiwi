@@ -1,9 +1,8 @@
 //
-//  Config.h
-//  queue
-//
-//  Created by Gabriel Pacheco on 6/26/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+// Config.h — Kiwi
+// today is 7/12/12, it is now 00:12 AM
+// created by TotenDev
+// see LICENSE for details.
 //
 
 #define __YES 1

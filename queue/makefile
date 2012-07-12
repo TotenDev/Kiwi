@@ -1,4 +1,9 @@
 #
+# makefile — Kiwi
+# today is 7/12/12, it is now 19:25 PM
+# created by TotenDev
+# see LICENSE for details.
+#
 # Make File for GCC with GNUStep and Obj-c
 # 
 # Should Use: gcc `gnustep-config --objc-flags` -Wall -L/usr/GNUstep/System/Library/Libraries/ -lgnustep-base teste.m -o teste

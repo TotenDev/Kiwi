@@ -1,5 +1,8 @@
 //
-// Prefix header for all source files of the 'queue' target in the 'queue' project
+// queue-Prefix.h — Kiwi
+// today is 7/12/12, it is now 00:12 AM
+// created by TotenDev
+// see LICENSE for details.
 //
 
 #ifdef __OBJC__

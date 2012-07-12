@@ -1,9 +1,8 @@
 //
-//  TDLog.h
-//  WWDCounter
-//
-//  Created by Gabriel Pacheco on 2/17/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+// TDLog.h — Kiwi
+// today is 7/12/12, it is now 00:12 AM
+// created by TotenDev
+// see LICENSE for details.
 //
 
 //Log functionalitys

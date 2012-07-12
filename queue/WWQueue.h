@@ -1,9 +1,8 @@
 //
-//  WWQueue.h
-//  WWDCounter
-//
-//  Created by Gabriel Pacheco on 3/8/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+// WWQueue.h — Kiwi
+// today is 7/12/12, it is now 00:12 AM
+// created by TotenDev
+// see LICENSE for details.
 //
 
 #import <Foundation/Foundation.h>

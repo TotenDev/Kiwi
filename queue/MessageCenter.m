@@ -1,9 +1,8 @@
 //
-//  MessageCenter.m
-//  queue
-//
-//  Created by Gabriel Pacheco on 6/25/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+// MessageCenter.m — Kiwi
+// today is 7/12/12, it is now 00:12 AM
+// created by TotenDev
+// see LICENSE for details.
 //
 
 #import "MessageCenter.h"
